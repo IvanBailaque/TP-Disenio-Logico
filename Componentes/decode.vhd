@@ -48,12 +48,6 @@ begin
                 reg_a_we    <=  '1';
                 out_we      <=  '0';
                 reg_we      <=  '0';
-            when "00000001" =>
-                bus_sel     <=  "10";
-                alu_op      <=  "000";
-                reg_a_we    <=  '0';
-                out_we      <=  '0';
-                reg_we      <=  '1';
             when "00001010" =>
                 bus_sel     <=  "00";
                 alu_op      <=  "010";
