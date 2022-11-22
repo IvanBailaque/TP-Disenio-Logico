@@ -1,6 +1,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.ALL;
 
 entity regs is
     Port ( clk : in  STD_LOGIC;
@@ -28,12 +29,12 @@ begin
       end loop; 
     elsif (clk'event and clk = '1') then
       if (we = '1') then
-        reg(conv_integer(rd)) <= din;
+        reg(to_integer(unsigned(rd))) <= din;
       end if;
     end if; 
   end process; 
 
-dout <= reg(conv_integer(rs)); 
+dout <= reg(to_integer(unsigned(rs))) ; 
 
 
 end registers_table_arq;

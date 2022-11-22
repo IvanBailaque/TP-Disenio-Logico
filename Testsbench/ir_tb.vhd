@@ -49,7 +49,6 @@ begin
         -- Con una señal de clk y la we habilidata, pasamos el dato in a la salida
         clk <= '1';
         ir_we <= '1';
-        ir_in <= "1111111111111111";
         wait for delay;
         assert ir_out = ir_in report "Error al escribir el dato" severity error;
 
