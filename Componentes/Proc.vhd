@@ -29,33 +29,59 @@ component regs
            dout : out  std_logic_vector (7 downto 0));
 end component;
 
-component alu port ( op: in  std_logic_vector(3 downto 0);
+component alu port ( sel: in  std_logic_vector(2 downto 0);
            a,b : in  std_logic_vector (7 downto 0);
            s : out  std_logic_vector (7 downto 0));
 end component;
 
 component rom_prog port (addr : in  std_logic_vector (6 downto 0);
-					output : out  std_logic_vector (15 downto 0));
+						data_out : out  std_logic_vector (15 downto 0));
 end component; 
 
+component decode port (in_dec : in  std_logic_vector (7 downto 0);
+			reg_we,out_we,reg_a_we  : out  std_logic;
+			alu_op : out  std_logic_vector (2 downto 0);
+			bus_sel : out  std_logic_vector (1 downto 0));
+end component;
 
-component decode port (input : in  std_logic_vector (8 downto 0);
-					reg_we : out  std_logic;
-					out_we : out  std_logic;
-					reg_a_we: out  std_logic;
-					alu_op : out  std_logic_vector (3 downto 0);
-					bus_sel : out  std_logic_vector (1 downto 0));
-end component; 
+component ir port(
+			ir_in : in std_logic_vector(15 downto 0);
+			clk,ir_we,rst : in std_logic;
+			ir_out : out std_logic_vector(15 downto 0));
+end component;
 
+component mux3_8 port(
+			a, b, c : in std_logic_vector(7 downto 0);
+        	sel : in std_logic_vector(1 downto 0);
+        	mux_out : out std_logic_vector(7 downto 0));
+end component;
 
--- ================
+component PC port(
+			pc_out: out std_logic_vector(6 downto 0);
+			clk, rst : in std_logic);
+end component;
 
--- ================
--- declaraci�n de se�ales usadas 
+component reg_a port(
+			reg_a_in : in std_logic_vector(7 downto 0);
+			reg_a_out: out std_logic_vector(7 downto 0);
+			clk, rst, reg_a_we: in std_logic);
+end component;
+
+component reg_out port(
+        	reg_out_in : in std_logic_vector(7 downto 0);
+        	reg_out_out: out std_logic_vector(7 downto 0);
+        	clk, rst, reg_out_we: in std_logic);
+end component;
+
+-- declaracion de señales usadas
 
 -- Banco de registros
 signal we: std_logic; -- senal para escribir en el banco de registro 
 signal rd, rs: std_logic_vector(3 downto 0);
+
+signal out_pc : std_logic_vector(6 downto 0); -- salida del pc, entrada de rom_prog
+
+
 -- signal ....
 
 -- ================
@@ -106,7 +132,6 @@ eDecode: decode port map ();
 		  end if;
 		  
 	end process;
--- ================
 
 
 end Beh_Proc;
