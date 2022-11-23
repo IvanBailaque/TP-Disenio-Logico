@@ -14,5 +14,5 @@ begin
         mux_out <= a when "00",
                    b when "01",
                    c when "10",
-                   "XX" when others;
+                   "XXXXXXXX" when others;
 end beh_mux3_8;

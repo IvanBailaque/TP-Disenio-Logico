@@ -27,6 +27,6 @@ begin
                 "0000001000001000" when addr = "0001100" else
                 "0000001000001101" when addr = "0001101" else
                 "0000001000001110" when addr = "0001110" else
-                "XXXXXXXXXXXXXXXX"
+                "XXXXXXXXXXXXXXXX";
 
 end beh_rom_prog;

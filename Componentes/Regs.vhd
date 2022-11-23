@@ -21,9 +21,9 @@ architecture registers_table_arq of regs is
   
 begin 
 
-  process (clk,reset)
+  process (clk,rst)
   begin
-    if reset= '1' then
+    if rst= '1' then
       for i in 0 to reg_tam-1 loop
         reg(i) <= (others => '0');
       end loop; 
@@ -34,9 +34,6 @@ begin
     end if; 
   end process; 
 
-dout <= reg(to_integer(unsigned(rs))) ; 
-
+dout <= reg(to_integer(unsigned(rs))) ;
 
 end registers_table_arq;
-
-
